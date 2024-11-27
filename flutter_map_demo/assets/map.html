@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+    <div style="width: 100%; height: 100vh" id="mapContainer"></div>
+    <script>
+        // Khởi tạo Here Maps
+        var platform = new H.service.Platform({
+            apikey: 'gOL9wI6ZfZL-KFLP86ADdhivWDwr7Mwg_4fkbhLGaC4' // Thay YOUR_API_KEY bằng API Key của bạn
+        });
+
+        var defaultLayers = platform.createDefaultLayers();
+        var map = new H.Map(
+            document.getElementById('mapContainer'),
+            defaultLayers.vector.normal.map,
+            {
+                zoom: 10,
+                center: { lat: 10.8231, lng: 106.6297 } // Tọa độ mặc định
+            }
+        );
+
+        // Bật tính năng giao thông thời gian thực
+        var trafficLayer = platform.getMapTileService({ type: 'traffic' }).createTileLayer('flow');
+        map.addLayer(trafficLayer);
+    </script>
+</body>
+
+</html>
